@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Chart, CategoricalXAxis, YAxis, ChartComponent, BarPlot, BarPlotElement, NaturalColors,
-  Formatters, TextPlot, LinearXAxis, LinePlot, ScatterPlot, ScatterPlotElement, StackedBarPlot,
+import { Chart, CategoricalAxis, Axis, ChartComponent, BarPlot, BarPlotElement, NaturalColors,
+  Formatters, TextPlot, LinearAxis, LinePlot, ScatterPlot, ScatterPlotElement, StackedBarPlot,
   StackedBarElement, GroupedBarPlot, PlotTypes, GuidePlot} from 'projects/library/public_api';
 import { interval } from 'rxjs';
 
@@ -51,9 +51,9 @@ export class DemoChartComponent implements OnInit {
 
   private setup_emea_txn_count() {
     const my_sql_count = 132376203 + 372;
-    const xaxis: CategoricalXAxis = {values: ['MySQL', 'NCF1', 'NCF100',
+    const xaxis: CategoricalAxis = {values: ['MySQL', 'NCF1', 'NCF100',
       'NCF106', 'NCF63', 'NCF64', 'NCF66']};
-    const yaxis: YAxis = {title: 'Counts', title_offset: 70};
+    const yaxis: Axis = {title: 'Counts', title_offset: 70};
     const plot: BarPlot = {
       type: PlotTypes.Bar,
       color: NaturalColors.blue,
@@ -89,14 +89,14 @@ export class DemoChartComponent implements OnInit {
   }
 
   private setup_first_chart() {
-    const xaxis: CategoricalXAxis = {
+    const xaxis: CategoricalAxis = {
       title: 'x-axis',
       values: ['A', 'B', 'C'],
       tick_label_rotation: -40,
       title_offset: 50,
       pegToZero: true
     };
-    const yaxis: YAxis = {title: 'y-axis', max: 175 };
+    const yaxis: LinearAxis = {title: 'y-axis', max: 175 };
     const barplot: BarPlot = {
       type: PlotTypes.Bar,
       color: NaturalColors.green,
@@ -162,8 +162,8 @@ export class DemoChartComponent implements OnInit {
   }
 
   private setup_linear_chart() {
-    const xaxis: LinearXAxis = {min: 0, max: 100, title: 'this is the x-axis'};
-    const yaxis: YAxis = {title: 'this is the y-axis', min: 0, max: 60};
+    const xaxis: LinearAxis = {min: 0, max: 100, title: 'this is the x-axis'};
+    const yaxis: LinearAxis = {title: 'this is the y-axis', min: 0, max: 60};
     const line_plot: LinePlot = {
       type: PlotTypes.Line,
       color: NaturalColors.blue,
@@ -202,7 +202,7 @@ export class DemoChartComponent implements OnInit {
   }
 
   private setup_scatter_plot() {
-    const xaxis: LinearXAxis = {min: 0, max: 100};
+    const xaxis: LinearAxis = {min: 0, max: 100};
     const splot: ScatterPlot = {
       type: PlotTypes.Scatter,
       color: NaturalColors.blue,
@@ -228,7 +228,7 @@ export class DemoChartComponent implements OnInit {
   }
 
   private setup_stacked_plot() {
-    const xaxis: CategoricalXAxis = {values: ['A', 'B', 'C', 'D', 'E', 'F']};
+    const xaxis: CategoricalAxis = {values: ['A', 'B', 'C', 'D', 'E', 'F']};
     const splot: StackedBarPlot = {
       type: PlotTypes.StackedBar,
       series: [

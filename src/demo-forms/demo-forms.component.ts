@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Select2Component, DatepickerComponent, Select2Data } from 'projects/library/public_api';
+import { Select2Component, Select2Data, DatetimePickerComponent } from 'projects/library/public_api';
+import * as moment from 'moment';
 
 @Component({
   templateUrl: 'demo-forms.component.html',
@@ -11,12 +12,8 @@ export class DemoFormsComponent implements OnInit {
   signInForm: FormGroup;
   us_states: Array<Select2Data>;
 
-  datepicker_options = {
-    startDate: '-1y'
-  };
-
   @ViewChild('usState') usStateElem: Select2Component;
-  @ViewChild('myDate') myDateElem: DatepickerComponent;
+  @ViewChild('myDateTime') myDateTime: DatetimePickerComponent;
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -38,6 +35,9 @@ export class DemoFormsComponent implements OnInit {
       ];
       this.us_states = new_us_states;
     }, 500);
+    setTimeout(() => {
+      this.myDateTime.set('5-Oct-2018');
+    }, 1000);
   }
 
   createForm() {
@@ -46,14 +46,14 @@ export class DemoFormsComponent implements OnInit {
       password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
       address: null,
       state: [null, Validators.required],
-      date: [null, Validators.required]
+      datetime: [null, Validators.required]
     });
   }
 
   reset_form() {
     this.signInForm.reset();
     this.usStateElem.reset();
-    this.myDateElem.reset();
+    this.myDateTime.reset();
   }
 
   state_changed(new_state: Select2Data) {
@@ -63,9 +63,11 @@ export class DemoFormsComponent implements OnInit {
     }
   }
 
-  date_changed(new_date: any) {
-    this.signInForm.patchValue({date: new_date});
-    this.signInForm.markAsTouched();
+  datetime_changed(new_date: null | Date) {
+    this.signInForm.patchValue({datetime: new_date});
+    if (new_date !== null) {
+      this.signInForm.markAsTouched();
+    }
   }
 
 }

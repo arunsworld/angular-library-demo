@@ -22,9 +22,8 @@
                             ab-select2(placeholder="Pick an Indian state...", [data]="us_states", 
                                     (selected)="state_changed($event)", #usState="")
                         .form-group.col-md-6
-                            label Date
-                            ab-datepicker([options]="datepicker_options", #myDate="",
-                                    (selected)="date_changed($event)")
+                            label Date &amp; Time
+                            ab-datetimepicker(#myDateTime="", (selected)="datetime_changed($event)")
                     .btn-group
                         button.btn.btn-primary(type="button", [disabled]="signInForm.status!='VALID'") Sign In
                         button.btn.btn-warning(type="button", *ngIf="!signInForm.untouched", (click)="reset_form()") Reset
